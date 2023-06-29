@@ -4,6 +4,13 @@ import { useState, useEffect } from "react";
 
 import PromptCard from "./PromptCard";
 
+/**
+ * PromptCardList component
+ * @param {Object} props
+ * @param {Array} props.data - An array of post data
+ * @param {Function} props.handleTagClick - Function to handle click events on tags
+ * @returns JSX.Element
+ */
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 prompt_layout">
@@ -18,6 +25,11 @@ const PromptCardList = ({ data, handleTagClick }) => {
   );
 };
 
+/**
+ * Feed component - a main page component responsible for fetching and displaying posts,
+ * as well as handling search and tag click events.
+ * @returns JSX.Element
+ */
 const Feed = () => {
   const [posts, setPosts] = useState([]);
 
@@ -25,6 +37,11 @@ const Feed = () => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
+  /**
+   * Filters posts based on a search text
+   * @param {string} searchText - Text to search for in post creator username, tag, and prompt
+   * @returns {Array} Filtered array of posts
+   */
   const filterPrompts = (searchText) => {
     const regex = new RegExp(searchText, "i");
 
@@ -47,6 +64,11 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
+  /**
+   * Handles changes in the search input.
+   * It applies a debounce method to the search.
+   * @param {Object} e - Event object
+   */
   const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
     setSearchText(e.target.value);
@@ -60,6 +82,11 @@ const Feed = () => {
     );
   };
 
+  /**
+   * Handles click events on tags.
+   * It sets the search text to the clicked tag and displays the search results.
+   * @param {string} tagName - The name of the clicked tag
+   */
   const handleTagClick = (tagName) => {
     setSearchText(tagName);
 
@@ -80,7 +107,10 @@ const Feed = () => {
         />
       </form>
       {searchText ? (
-        <PromptCardList data={searchedResults} handleTagClick={handleTagClick} />
+        <PromptCardList
+          data={searchedResults}
+          handleTagClick={handleTagClick}
+        />
       ) : (
         <PromptCardList data={posts} handleTagClick={handleTagClick} />
       )}
