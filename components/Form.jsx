@@ -1,3 +1,20 @@
+/**
+ * @module Form
+ */
+
+/**
+ * Form React component
+ *
+ * @param {object} props - Properties passed to component
+ * @param {string} props.type - Type of the form
+ * @param {object} props.post - Post object
+ * @param {Function} props.setPost - Setter function for post state
+ * @param {boolean} props.submitting - State indicating whether the form is currently being submitted
+ * @param {Function} props.handleSubmit - Function to handle form submission
+ * 
+ * @returns {React.Element} The rendered Form component
+ */
+
 import React from "react";
 
 import Link from "next/link";
